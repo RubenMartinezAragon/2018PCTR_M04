@@ -38,7 +38,9 @@ public class Ball {
 		
 		reflect();
 		
-		//TODO Check postcondition
+		//TODO Check postcondition HECHO
+		postCondition(x, y);
+		
 	}
 
 	private void reflect() {
@@ -82,6 +84,15 @@ public class Ball {
 
 	public Image getImage() {
 		return image;
+	}
+	
+	private void postCondition(double x2,double y2){
+		//no se salga del tablero
+		assert x2 < Board.RIGHTBOARD;
+		assert x2 > Board.LEFTBOARD;
+		assert y2 < Board.TOPBOARD;
+		assert y2 > Board.BOTTOMBOARD;
+		
 	}
 
 }

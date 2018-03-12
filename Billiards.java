@@ -15,7 +15,7 @@ public class Billiards extends JFrame {
 	public static int Width = 800;
 	public static int Height = 600;
 
-	private JButton b_start, b_stop;
+	private JButton b_start, b_stop,b_rei;
 
 	private Board board;
 	
@@ -39,11 +39,14 @@ public class Billiards extends JFrame {
 		b_start.addActionListener(new StartListener());
 		b_stop = new JButton("Parar");
 		b_stop.addActionListener(new StopListener());
+		b_rei = new JButton("Reiniciar");
+		b_rei.addActionListener(new ReiListener());
 
 		JPanel p_Botton = new JPanel();
 		p_Botton.setLayout(new FlowLayout());
 		p_Botton.add(b_start);
 		p_Botton.add(b_stop);
+		p_Botton.add(b_rei);
 
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(board, BorderLayout.CENTER);
@@ -99,6 +102,26 @@ public class Billiards extends JFrame {
 				estado="Parado";
 			}
 
+		}
+	}
+	
+	private class ReiListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if( !estado.equals("Iniciado")) {
+				initBalls();
+				hilopintor.interrupt();
+				board.setBalls(balls);
+				hilopintor= new Thread(new hiloPintor(board));
+				hilopintor.start();
+				for(int i=0;i<balls.length;i++) {
+					hiloballs[i].interrupt();//interrumpe el anterior
+					hiloballs[i]=new Thread(new hiloBall(balls[i]));//crea uno nuevo
+					hiloballs[i].start();
+				}
+				//System.out.println(Thread.currentThread());
+				estado="Movimiento";
+			}
 		}
 	}
 

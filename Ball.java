@@ -2,7 +2,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 //TODO Transform the code to be used safely in a concurrent context.  
 public class Ball {
-       //TODO  Find an archive named Ball.png 
+       //TODO  Find an archive named Ball.png HECHO
 	private String Ball = "Ball.png"; 
 
 	private double x,y,dx,dy;
@@ -14,9 +14,9 @@ public class Ball {
 		ImageIcon ii = new ImageIcon(this.getClass().getResource(Ball));
 		image = ii.getImage();
 		
-		//TODO Depend of image size
-		IMG_TAM_X = 32;
-		IMG_TAM_Y = 32;
+		//TODO Depend of image size HECHO
+		IMG_TAM_X = 128;
+		IMG_TAM_Y = 128;
 
 		
 		x = Billiards.Width/4-16;

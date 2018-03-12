@@ -19,8 +19,8 @@ public class Billiards extends JFrame {
 
 	private Board board;
 
-	// TODO update with number of group label. See practice statement.
-	private final int N_BALL = 2;
+	// TODO update with number of group label. See practice statement. HECHO
+	private final int N_BALL = 4;
 	private Ball[] balls;
 
 	public Billiards() {
@@ -54,7 +54,7 @@ public class Billiards extends JFrame {
 	}
 
 	private void initBalls() {
-		// TODO init balls
+		// TODO init balls HECHO
 		balls=new Ball[N_BALL+3];
 		for(int i=0;i<balls.length;i++) {
 			balls[i]=new Ball();

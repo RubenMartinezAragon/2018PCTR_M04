@@ -18,6 +18,10 @@ public class Billiards extends JFrame {
 	private JButton b_start, b_stop;
 
 	private Board board;
+	
+	private Thread[] hiloballs;
+	private Thread hilopintor;
+	private String estado="Iniciado";//evitar sobrecarga de hilos
 
 	// TODO update with number of group label. See practice statement. HECHO
 	private final int N_BALL = 4;
@@ -59,13 +63,25 @@ public class Billiards extends JFrame {
 		for(int i=0;i<balls.length;i++) {
 			balls[i]=new Ball();
 			
+			
 		}
+		board.setBalls(balls);
 	}
 
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
+			if(estado.equals("Parado")||estado.equals("Iniciado")) {
+				hilopintor= new Thread(new hiloPintor(board));
+				hilopintor.start();
+				hiloballs= new Thread[N_BALL+3];
+				for(int i=0;i<balls.length;i++) {
+					hiloballs[i]=new Thread(new hiloBall(balls[i]));
+					hiloballs[i].start();
+				}
+				estado="Movimiento";
+			}
 
 		}
 	}

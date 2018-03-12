@@ -71,7 +71,7 @@ public class Billiards extends JFrame {
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Code is executed when start button is pushed
+			// TODO Code is executed when start button is pushed HECHO
 			if(estado.equals("Parado")||estado.equals("Iniciado")) {
 				hilopintor= new Thread(new hiloPintor(board));
 				hilopintor.start();
@@ -89,7 +89,15 @@ public class Billiards extends JFrame {
 	private class StopListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Code is executed when stop button is pushed
+			// TODO Code is executed when stop button is pushed HECHO
+			if( estado.equals("Movimiento")) {
+				hilopintor.interrupt();
+				for(int i=0;i<balls.length;i++) {
+					hiloballs[i].interrupt();
+					System.out.println(hiloballs[i].getState());
+				}
+				estado="Parado";
+			}
 
 		}
 	}
